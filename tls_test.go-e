@@ -4,7 +4,7 @@ import (
 	"crypto/tls"
 	"testing"
 
-	"github.com/quickfixgo/quickfix/config"
+	"github.com/NaNuNaNu/quickfix/config"
 	"github.com/stretchr/testify/suite"
 )
 

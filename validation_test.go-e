@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/quickfixgo/quickfix/datadictionary"
+	"github.com/NaNuNaNu/quickfix/datadictionary"
 	"github.com/stretchr/testify/assert"
 )
 
