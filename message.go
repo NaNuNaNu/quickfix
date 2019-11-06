@@ -4,9 +4,10 @@ import (
 	"bytes"
 	"fmt"
 	"math"
+	"strconv"
 	"time"
 
-	"github.com/quickfixgo/quickfix/datadictionary"
+	"github.com/NaNuNaNu/quickfix/datadictionary"
 )
 
 //Header is first section of a FIX Message
@@ -246,6 +247,37 @@ func ParseMessageWithDataDictionary(
 
 	return
 
+}
+
+// Pretty print
+func (m *Message) Print() string {
+
+	var str string
+	fm := m.Header.FieldMap
+	for _, tag := range fm.Tags() {
+		tvs := fm.GetTagValues(tag)
+		str += formString(tvs)
+	}
+	fm = m.Body.FieldMap
+	for _, tag := range fm.Tags() {
+		tvs := fm.GetTagValues(tag)
+		str += formString(tvs)
+	}
+	fm = m.Trailer.FieldMap
+	for _, tag := range fm.Tags() {
+		tvs := fm.GetTagValues(tag)
+		str += formString(tvs)
+	}
+	return str
+}
+
+func formString(tvs []TagValue) string {
+	var tagstr, valstr string
+	for _, tv := range tvs {
+		tagstr = strconv.Itoa(tv.Tag())
+		valstr = tv.String()
+	}
+	return tagstr + "=" + valstr + "|"
 }
 
 func isHeaderField(tag Tag, dataDict *datadictionary.DataDictionary) bool {
