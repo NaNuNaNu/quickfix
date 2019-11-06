@@ -250,30 +250,17 @@ func ParseMessageWithDataDictionary(
 
 // Pretty print
 func (m *Message) Print() string {
-
 	var str string
-	fm := m.Header.FieldMap
-	for _, tag := range fm.Tags() {
-		tvs := fm.GetTagValues(tag)
-		str += formString(tvs)
-	}
-	fm = m.Body.FieldMap
-	for _, tag := range fm.Tags() {
-		tvs := fm.GetTagValues(tag)
-		str += formString(tvs)
-	}
-	fm = m.Trailer.FieldMap
-	for _, tag := range fm.Tags() {
-		tvs := fm.GetTagValues(tag)
-		str += formString(tvs)
-	}
+	str += formString(m.Header.FieldMap.GetAllTagValues())
+	str += formString(m.Body.FieldMap.GetAllTagValues())
+	str += formString(m.Trailer.FieldMap.GetAllTagValues())
 	return str
 }
 
 func formString(tvs []TagValue) string {
 	var valstr string
 	for _, tv := range tvs {
-		valstr = tv.String()
+		valstr += tv.String()
 	}
 	return valstr + "|"
 }
