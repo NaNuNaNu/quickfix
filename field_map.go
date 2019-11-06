@@ -63,6 +63,11 @@ func (m FieldMap) Tags() []Tag {
 	return tags
 }
 
+func (m FieldMap) GetTagValues(tag Tag) []TagValue {
+	tv, _ := m.tagLookup[tag]
+	return tv
+}
+
 //Get parses out a field in this FieldMap. Returned reject may indicate the field is not present, or the field value is invalid.
 func (m FieldMap) Get(parser Field) MessageRejectError {
 	return m.GetField(parser.Tag(), parser)
