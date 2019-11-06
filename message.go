@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"math"
-	"strconv"
 	"time"
 
 	"github.com/NaNuNaNu/quickfix/datadictionary"
@@ -272,12 +271,11 @@ func (m *Message) Print() string {
 }
 
 func formString(tvs []TagValue) string {
-	var tagstr, valstr string
+	var valstr string
 	for _, tv := range tvs {
-		tagstr = strconv.Itoa(tv.Tag())
 		valstr = tv.String()
 	}
-	return tagstr + "=" + valstr + "|"
+	return valstr + "|"
 }
 
 func isHeaderField(tag Tag, dataDict *datadictionary.DataDictionary) bool {
