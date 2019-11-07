@@ -71,8 +71,9 @@ func (m FieldMap) GetTagValues(tag Tag) []TagValue {
 func (m FieldMap) GetAllTagValues() []TagValue {
 	var tvs []TagValue
 	for _, tag := range m.sortedTags() {
-		tv, _ := m.tagLookup[tag]
-		tvs = append(tvs, tv...)
+		if tv, f := m.tagLookup[tag]; f {
+			tvs = append(tvs, tv...)
+		}
 	}
 	return tvs
 }

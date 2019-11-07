@@ -260,9 +260,9 @@ func (m *Message) Print() string {
 func formString(tvs []TagValue) string {
 	var valstr string
 	for _, tv := range tvs {
-		valstr += tv.String()
+		valstr += tv.String() + "|"
 	}
-	return valstr + "|"
+	return valstr
 }
 
 func isHeaderField(tag Tag, dataDict *datadictionary.DataDictionary) bool {
